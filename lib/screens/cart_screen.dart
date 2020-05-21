@@ -3,6 +3,8 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:virtual_store/models/cart_model.dart';
 import 'package:virtual_store/models/user_model.dart';
 import 'package:virtual_store/screens/login_screen.dart';
+import 'package:virtual_store/tiles/cart_tile.dart';
+import 'package:virtual_store/tiles/category_tile.dart';
 
 class CartScreen extends StatelessWidget {
 
@@ -60,6 +62,28 @@ class CartScreen extends StatelessWidget {
                   ),
                 ],
               ),
+            );
+          } else if( model.products == null || model.products.length == 0 ){
+            return Center(
+              child: Text("Nenhum produto no carrinho", 
+                style: TextStyle(
+                  fontSize: 20.0, 
+                  fontWeight: FontWeight.bold
+                ),
+                textAlign: TextAlign.center
+              ),
+            );
+          } else {
+            return ListView(
+              children: <Widget>[
+                Column(
+                  children: model.products.map(
+                    (product){
+                      return CartTile(product);
+                    }
+                  ).toList(),
+                ),
+              ],
             );
           }
         }

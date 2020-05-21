@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "99395509494",
+    "firebase_url": "https://storeflutter-a82e0.firebaseio.com",
+    "project_id": "storeflutter-a82e0",
+    "storage_bucket": "storeflutter-a82e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99395509494:android:e6107659cb1f4420a7e0d7",
+        "android_client_info": {
+          "package_name": "com.tedesco.store.virtual_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "99395509494-ndjql895ekpot3pdq971nqiqc6q5o4be.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbK9BBhH5Sy6jkFPSLa4nOU3gx9ElP9tc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "99395509494-ndjql895ekpot3pdq971nqiqc6q5o4be.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

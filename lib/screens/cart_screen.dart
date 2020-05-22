@@ -12,18 +12,23 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Carrinho'),
+        centerTitle: true,
         actions: <Widget>[
           Container(
             padding: EdgeInsets.only(right: 10.0),
             alignment: Alignment.center,
             child: ScopedModelDescendant<CartModel>(
               builder: (context, child, model){
-                int quatityProduct = 0;
-                model.products == null ? quatityProduct = 0 : quatityProduct = model.products.length;
-                return Text(
-                  '${quatityProduct ?? 0} ${quatityProduct == 1 ? 'Item' : 'Itens'} ',
-                  style: TextStyle(fontSize: 15.0),
-                );
+                if(UserModel.of(context).isLoggedIn()){
+                  int quatityProduct = 0;
+                  model.products == null ? quatityProduct = 0 : quatityProduct = model.products.length;
+                  return Text(
+                    '${quatityProduct ?? 0} ${quatityProduct == 1 ? 'Item' : 'Itens'} ',
+                    style: TextStyle(fontSize: 15.0),
+                  );
+                } else {
+                  return Text('');
+                }
               }, 
             ),
           )

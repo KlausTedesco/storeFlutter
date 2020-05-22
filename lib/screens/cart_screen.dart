@@ -4,7 +4,6 @@ import 'package:virtual_store/models/cart_model.dart';
 import 'package:virtual_store/models/user_model.dart';
 import 'package:virtual_store/screens/login_screen.dart';
 import 'package:virtual_store/tiles/cart_tile.dart';
-import 'package:virtual_store/tiles/category_tile.dart';
 
 class CartScreen extends StatelessWidget {
 
@@ -19,10 +18,10 @@ class CartScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: ScopedModelDescendant<CartModel>(
               builder: (context, child, model){
-                int quatityProduct = model.products.length;
-
+                int quatityProduct = 0;
+                model.products == null ? quatityProduct = 0 : quatityProduct = model.products.length;
                 return Text(
-                  '${quatityProduct ?? 0} ${quatityProduct == 1 ? "Item" : "Itens"} ',
+                  '${quatityProduct ?? 0} ${quatityProduct == 1 ? 'Item' : 'Itens'} ',
                   style: TextStyle(fontSize: 15.0),
                 );
               }, 
@@ -65,7 +64,7 @@ class CartScreen extends StatelessWidget {
             );
           } else if( model.products == null || model.products.length == 0 ){
             return Center(
-              child: Text("Nenhum produto no carrinho", 
+              child: Text("Nenhum produto no carrinho!", 
                 style: TextStyle(
                   fontSize: 20.0, 
                   fontWeight: FontWeight.bold

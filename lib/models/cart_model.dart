@@ -10,7 +10,7 @@ class CartModel extends Model{
 
   bool isLoading = false;
 
-  List<CartProduct> products;
+  List<CartProduct> products = [];
 
   CartModel( this.user );
 
@@ -18,15 +18,19 @@ class CartModel extends Model{
     ScopedModel.of<CartModel>(context);
 
   void addCartItem( CartProduct cartProduct ){
-    products.add( cartProduct );
+    products.add(cartProduct);
 
-    Firestore.instance.collection('users').document(user.firebaseUser.uid).collection('cart').add(cartProduct.toMap()).then((doc){cartProduct.idCart = doc.documentID;}) ;
+    Firestore.instance.collection('users').document(user.firebaseUser.uid)
+      .collection('cart').add(cartProduct.toMap()).then((doc){
+        cartProduct.idCart = doc.documentID;
+    });
   
     notifyListeners();
   }
 
   void removeCartItem( CartProduct cartProduct ){
-    Firestore.instance.collection('users').document(user.firebaseUser.uid).collection('cart').document(cartProduct.idCart).delete();
+    Firestore.instance.collection('users').document(user.firebaseUser.uid)
+      .collection('cart').document(cartProduct.idCart).delete();
     
     products.remove(cartProduct);
 

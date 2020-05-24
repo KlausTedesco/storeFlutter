@@ -9,6 +9,9 @@ class CartModel extends Model {
 
   bool isLoading = false;
 
+  String couponCode;
+  int discountPercentage = 0;
+
   List<CartProduct> products = [];
 
   CartModel(this.user) {
@@ -86,4 +89,10 @@ class CartModel extends Model {
 
     notifyListeners();
   }
+
+  void setCoupon(String couponCode, int discountPercentage){
+    this.couponCode = couponCode;
+    this.discountPercentage = discountPercentage;
+  }
+
 }

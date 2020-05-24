@@ -96,7 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void _onSuccess(){
     _scaffoldKey.currentState.showSnackBar(
       SnackBar(content: Text('Usuário cadastrado com sucesso!'),
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: Colors.blueAccent,
         duration: Duration(seconds: 4)
       )
     );

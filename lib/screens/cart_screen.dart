@@ -4,6 +4,9 @@ import 'package:virtual_store/models/cart_model.dart';
 import 'package:virtual_store/models/user_model.dart';
 import 'package:virtual_store/screens/login_screen.dart';
 import 'package:virtual_store/tiles/cart_tile.dart';
+import 'package:virtual_store/widgets/discount_card.dart';
+import 'package:virtual_store/widgets/price_card.dart';
+import 'package:virtual_store/widgets/ship_card.dart';
 
 class CartScreen extends StatelessWidget {
 
@@ -87,6 +90,9 @@ class CartScreen extends StatelessWidget {
                     }
                   ).toList(),
                 ),
+                DiscountCart(),
+                ShipCard(),
+                PriceCard((){})
               ],
             );
           }

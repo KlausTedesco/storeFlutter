@@ -28,7 +28,7 @@ class CartProduct {
       'idProduct' : idProduct,
       'quantity' : quantity,
       'size' : size,
-      //'product' : productData.toResumeMap()
+      'product' : productData.toResumeMap()
     };
   }
   

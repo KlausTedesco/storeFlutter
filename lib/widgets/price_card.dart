@@ -16,6 +16,12 @@ class PriceCard extends StatelessWidget {
         padding: EdgeInsets.all(15.0),
         child: ScopedModelDescendant<CartModel>(
           builder: (context, child, model){
+
+            double price = model.getProductsPrice();
+            double discount = model.getDiscount();
+            double ship = model.getShipPrice();
+            double total = model.getTotalPrice();
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -29,21 +35,21 @@ class PriceCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text('Subtotal'),
-                    Text('R\$ 0.00')
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('Frete'),
-                    Text('R\$ 0.00')
+                    Text('R\$ ${price.toStringAsFixed(2)}')
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text('Desconto'),
-                    Text('R\$ 0.00')
+                    Text('R\$ ${discount.toStringAsFixed(2)}')
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text('Frete'),
+                    Text('R\$ ${ship.toStringAsFixed(2)}')
                   ],
                 ),
                 Divider(),
@@ -53,7 +59,7 @@ class PriceCard extends StatelessWidget {
                     Text('Total',
                       style: TextStyle( fontWeight: FontWeight.bold ),
                     ),
-                    Text('R\$ 0.00',
+                    Text('R\$ ${total.toStringAsFixed(2)}',
                       style: TextStyle( 
                         fontSize: 15.0, 
                         color: Colors.blueAccent,
@@ -67,7 +73,7 @@ class PriceCard extends StatelessWidget {
                   child: Text('Finalizar Pedido'),
                   textColor: Colors.white,
                   color: Colors.blueAccent,
-                  onPressed: (){}
+                  onPressed: buy,
                 )
               ],
             );

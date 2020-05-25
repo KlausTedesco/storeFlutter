@@ -95,4 +95,83 @@ class CartModel extends Model {
     this.discountPercentage = discountPercentage;
   }
 
+  void updatePrices(){
+    notifyListeners();
+  }
+
+  double getProductsPrice(){
+    double price = 0.0;
+    for(CartProduct cart in products){
+      if(cart.productData != null){
+        price += cart.quantity * cart.productData.price;
+      }
+    }
+    return price;
+  }
+
+  double getDiscount(){
+    return getProductsPrice() * discountPercentage / 100;
+  }
+
+  double getShipPrice(){
+    return 9.99; 
+  }
+
+  double getTotalPrice(){
+    double price = getProductsPrice();
+    double discount = getDiscount();
+    double ship = getShipPrice();
+    double total = price - discount + ship;
+
+    return total;
+  }
+
+  Future<String> finishOrder() async {
+    if(products.length == 0 ) return null;
+
+    isLoading = true;
+    notifyListeners();
+
+    double productsPrice = getProductsPrice();
+    double discount = getDiscount();
+    double shipPrice = getShipPrice();
+    double total = getTotalPrice();
+
+    DocumentReference referenceOrder = await Firestore.instance.collection('orders').add(
+      {
+        'clientId': user.firebaseUser.uid,
+        'products': products.map((cartProduct)=>cartProduct.toMap()).toList(),
+        'shipPrice': shipPrice,
+        'productsPrice': productsPrice,
+        'discount': discount,
+        'totalPrice': total,
+        'statusOrder': 1 // status: 1-Em preparacao, 2-Nota Fiscal, 3-A caminho, 4-Entregue
+      }
+    );
+
+    await Firestore.instance.collection('users').document(user.firebaseUser.uid)
+      .collection('orders').document(referenceOrder.documentID).setData(
+        {
+          'orderId': referenceOrder.documentID
+        }
+    );
+    
+    QuerySnapshot query = await Firestore.instance.collection('users').document(user.firebaseUser.uid)
+      .collection('cart').getDocuments();
+    
+    for( DocumentSnapshot doc in query.documents ){
+      doc.reference.delete();
+    }
+
+    products.clear();
+    couponCode = null;
+    discountPercentage = 0;
+    isLoading = false;
+
+    notifyListeners();
+
+    return referenceOrder.documentID;
+  }
+
+
 }

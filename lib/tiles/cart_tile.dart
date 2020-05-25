@@ -12,6 +12,7 @@ class CartTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget _buidContent() {
+      CartModel.of(context).updatePrices();
       return Row(
         children: <Widget>[
           Container(

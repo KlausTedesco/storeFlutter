@@ -145,7 +145,7 @@ class CartModel extends Model {
         'productsPrice': productsPrice,
         'discount': discount,
         'totalPrice': total,
-        'statusOrder': 1 // status: 1-Em preparacao, 2-Nota Fiscal, 3-A caminho, 4-Entregue
+        'statusOrder': 1 // status 1 = Aguardando Pagamento
       }
     );
 

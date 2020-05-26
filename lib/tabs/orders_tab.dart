@@ -17,7 +17,17 @@ class OrdersTab extends StatelessWidget {
         builder: (context, snapshot){
           if(!snapshot.hasData){
             return Center(child: CircularProgressIndicator());
-          } else {
+          } else if (snapshot.data.documents.length == 0) {
+            return Center(
+              child: Text('Você não tem nenhum pedido!',
+                style: TextStyle(
+                  fontSize: 20.0, 
+                  fontWeight: FontWeight.bold
+                ),
+                textAlign: TextAlign.center
+              )
+            );
+          }else {
             return ListView(
               children: snapshot.data.documents.map((doc) => OrderTile(doc.documentID)).toList().reversed.toList()
             ); 
